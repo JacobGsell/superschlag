@@ -1,30 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import LoginForm from './components/LoginForm'
+// In App.js in a new project
 
-export default function App() {
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Navigation from './src/navigation';
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.logo}>Superschlag</Text>
-      <LoginForm></LoginForm>
-    </View>
+      <Navigation />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#eee'
-  },
-  logo: {
-    paddingTop: 135,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    fontSize: 24,
-    fontWeight: 'bold'
-
-  },
-  loginForm: {
-
-  }
-});
+export default App;

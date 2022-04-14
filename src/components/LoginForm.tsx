@@ -1,16 +1,18 @@
-import React from "react";
-import { View, Text, StyleSheet, TextInput, SafeAreaView } from 'react-native';
+import * as React from "react";
+import { View, Text, StyleSheet, TextInput, SafeAreaView, TouchableOpacity } from 'react-native';
 import CustomButton from './CustomButton';
-
-const login = () => { console.log('login') }
-const register = () => { console.log('register') }
+import { useNavigation } from '@react-navigation/native';
 
 function LoginForm() {
+    const navigation = useNavigation();
     const [userName, onChangeText] =
         React.useState('');
 
     const [password, onChangePassword] =
         React.useState('');
+
+    const login = () => { navigation.navigate('Dashboard')}
+    const register = () => { console.log('register') }
 
     return (
         <View>

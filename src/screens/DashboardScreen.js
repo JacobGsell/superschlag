@@ -2,6 +2,11 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import CustomButton from '../components/CustomButton';
+import axios from 'axios';
+import { UserMock as UserMock } from '../mock/User'
+import { AvatarMock } from '../mock/Avatar';
+import { JobMock } from '../mock/Job';
+import User from '../models/User';
 
 const DATA = [
     {
@@ -15,11 +20,7 @@ const DATA = [
     {
         id: '58694a0f-3da1-471f-bd96-145571e29d72',
         title: 'Heftklammer',
-    },
-    {
-        id: '58694a0f-2da1-471f-bd96-145571e29d72',
-        title: 'Rucksack',
-    },
+    }
 ];
 
 const InventorySlotListItem = ({ title }) => {
@@ -31,18 +32,24 @@ const InventorySlotListItem = ({ title }) => {
 }
 
 const renderItem = ({ item }) => (
-    <InventorySlotListItem title={item.title} />
+    <InventorySlotListItem title={item.name} />
 );
 
 
 const DashboardScreen = () => {
     const navigation = useNavigation();
+    const user = UserMock;
+    const avatar = AvatarMock
 
     return (
 
         <View style={styles.base}>
             <View style={styles.circle}>
                 <Text style={{ textAlign: 'center' }}> Profilbild</Text>
+            </View>
+
+            <View style={styles.userName}>
+                <Text style={{ textAlign: 'center', fontSize: 18 }}>{AvatarMock.name} | {JobMock.name}</Text>
             </View>
 
             <CustomButton
@@ -53,7 +60,7 @@ const DashboardScreen = () => {
             />
             <View style={styles.listContainer}>
                 <FlatList
-                    data={DATA}
+                    data={AvatarMock.gear}
                     renderItem={renderItem}
                     keyExtractor={item => item.id}
                 />
@@ -77,7 +84,7 @@ const styles = StyleSheet.create({
         borderRadius: 75
     },
     fight: {
-        marginTop: 30,
+        marginTop: 40,
         width: 230,
         height: 40,
         borderRadius: 14,
@@ -107,6 +114,10 @@ const styles = StyleSheet.create({
     },
     listText: {
         textAlign: 'center'
+    },
+    userName: {
+        marginTop: 13,
+        justifyContent: 'center',
     }
 })
 

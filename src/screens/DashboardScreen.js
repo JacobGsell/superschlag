@@ -23,16 +23,26 @@ const DATA = [
     }
 ];
 
-const InventorySlotListItem = ({ title }) => {
+const InventorySlotListItem = ({ item }) => {
+    const navigation = useNavigation();
+
     return (
+        
         <View style={styles.listItem}>
-            <Text style={styles.listText}>{title}</Text>
+            <Text style={styles.listText}>{item.name} </Text>
+            <Text onPress={() => {navigation.navigate('InventoryItem', {
+                name: item.name,
+                itemType: item.itemType
+            }),
+            console.log(item.itemType)
+        }} 
+            style={styles.listIcon}>{'>>'}</Text>
         </View>
     )
 }
 
 const renderItem = ({ item }) => (
-    <InventorySlotListItem title={item.name} />
+    <InventorySlotListItem item={item} />
 );
 
 
@@ -62,7 +72,7 @@ const DashboardScreen = () => {
                 <FlatList
                     data={AvatarMock.gear}
                     renderItem={renderItem}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.itemType}
                 />
             </View>
         </View>
@@ -89,19 +99,21 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 14,
         shadowColor: '#333',
+        borderWidth: 1,
+        borderColor: '#000',
         shadowRadius: 3,
-        backgroundColor: '#0075ff',
+        backgroundColor: '#fff',
         elevation: 1,
         marginLeft: 'auto',
         marginRight: 'auto',
         justifyContent: 'center'
     },
     fightText: {
-        color: '#fff',
+        color: '#000',
         textAlign: 'center'
     },
     listContainer: {
-        width: 170,
+        width: 230,
         marginTop: 20,
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -109,11 +121,21 @@ const styles = StyleSheet.create({
     },
     listItem: {
         marginTop: 30,
-        borderBottomWidth: 1,
-        borderBottomColor: '#777'
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     listText: {
-        textAlign: 'center'
+        width: '80%',
+        borderBottomWidth: 1,
+        borderBottomColor: '#777',
+    },
+    listIcon: {
+        width: '10%',
+        height: '100%',
+        textAlign: 'center',
+        borderRadius: 10,
+        backgroundColor: '#000',
+        color: '#fff',
     },
     userName: {
         marginTop: 13,

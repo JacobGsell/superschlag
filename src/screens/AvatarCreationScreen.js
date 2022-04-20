@@ -3,9 +3,10 @@ import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { FlatGrid } from 'react-native-super-grid';
 import CustomButton from '../components/CustomButton';
+import { JobMocks } from '../mock/Job';
 
-const CreateAvatar = () => {
-    console.log('erstelle avatar!');
+const CreateAvatar = (content) => {
+    console.log(content);
 }
 
 const AvatarCreationScreen = () => {
@@ -17,8 +18,10 @@ const AvatarCreationScreen = () => {
         { name: 'Leben', code: 15 },
     ]);
 
-    const [selectedValue, setSelectedValue] = useState('');
+    const [selectedValue, setSelectedValue] = React.useState('');
     const [AvatarNameText, onChangeText] = React.useState('');
+
+    let selectedJob = JobMocks[0];
 
     return (
         <View
@@ -47,10 +50,21 @@ const AvatarCreationScreen = () => {
                 <Picker
                     style={styles.picker}
                     selectedValue={selectedValue}
-                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                    onValueChange={(itemValue, itemIndex) => {
+                        console.log("index", itemIndex)
+                        console.log("value", itemValue)
+                        console.log("name", JobMocks[itemValue].name)
+                        selectedJob = JobMocks[itemValue]
+
+                        setSelectedValue(itemValue)
+                        
+                        setItems(Object.entries(selectedJob.stats))
+                        console.log(Object.entries(selectedJob.stats))
+                        //setItems(Object.entries(selectedJob.stats))
+                    }}
                 >
-                    <Picker.Item label="Ritter" value="0" />
-                    <Picker.Item label="Milchmann" value="1" />
+                    <Picker.Item label="Milchmann" value="0" />
+                    <Picker.Item label="Ritter" value="1" />
                     <Picker.Item label="Dieb" value="2" />
                 </Picker>
             </View>
@@ -69,15 +83,16 @@ const AvatarCreationScreen = () => {
                 renderItem={({ item }) => (
                     <View style={[styles.itemContainer]}>
                         <View style={styles.itemWrapper}>
-                            <Text style={styles.itemName}>{item.name}</Text>
-                            <Text style={styles.itemCode}>{item.code}</Text>
+                            <Text style={styles.itemName}>{item[0]}: 
+                                <Text style={{fontWeight: 'bold'}}> {item[1]}</Text>
+                            </Text>
                         </View>
                     </View>
                 )}
             />
             <CustomButton
                 title='Erstellen'
-                onPress={CreateAvatar}
+                onPress={() => CreateAvatar(selectedValue)}
                 style={styles.submitButton}
                 textStyle={styles.submitButtonText}
             />
@@ -99,6 +114,7 @@ const styles = StyleSheet.create({
     },
     statsLabel: {
         marginTop: 30,
+        marginBottom: 10,
         textAlign: 'center'
     },
     nameInput: {
@@ -107,7 +123,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginLeft: 'auto',
         marginRight: 'auto',
-        width: '100%'
+        width: '100%',
+        textAlign: 'center'
     },
     container: {
         paddingTop: 40,
@@ -150,6 +167,8 @@ const styles = StyleSheet.create({
         width: '80%',
         marginLeft: 'auto',
         marginRight: 'auto',
+        marginVertical: 10,
+        borderBottomWidth: 1
     }
 });
 

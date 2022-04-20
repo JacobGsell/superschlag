@@ -8,3 +8,37 @@ export const JobMock = {
         health: 120
     }
 }
+
+export const JobMocks =
+    [
+        {
+            name: 'Milchmann',
+            stats: {
+                attack: 5,
+                defense: 5,
+                evasion: 5,
+                luck: 150,
+                health: 10
+            }
+        },
+        {
+            name: 'Ritter',
+            stats: {
+                attack: 20,
+                defense: 20,
+                evasion: 2,
+                luck: 8,
+                health: 120
+            }
+        },
+        {
+            name: 'Dieb',
+            stats: {
+                attack: 15,
+                defense: 10,
+                evasion: 20,
+                luck: 40,
+                health: 80
+            }
+        }
+    ]

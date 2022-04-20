@@ -45,6 +45,7 @@ const AvatarCreationScreen = () => {
 
             <View style={styles.pickerContainer}>
                 <Picker
+                    style={styles.picker}
                     selectedValue={selectedValue}
                     onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                 >
@@ -64,11 +65,13 @@ const AvatarCreationScreen = () => {
                 style={styles.gridView}
                 // staticDimension={300}
                 // fixed
-                spacing={10}
+                spacing={2}
                 renderItem={({ item }) => (
                     <View style={[styles.itemContainer]}>
-                        <Text style={styles.itemName}>{item.name}</Text>
-                        <Text style={styles.itemCode}>{item.code}</Text>
+                        <View style={styles.itemWrapper}>
+                            <Text style={styles.itemName}>{item.name}</Text>
+                            <Text style={styles.itemCode}>{item.code}</Text>
+                        </View>
                     </View>
                 )}
             />
@@ -83,20 +86,53 @@ const AvatarCreationScreen = () => {
 }
 
 const styles = StyleSheet.create({
+    title: {
+        textAlign: 'center',
+        marginBottom: 30
+    },
+    nameLabel: {
+        textAlign: 'center'
+    },
+    jobLabel: {
+        marginTop: 30,
+        textAlign: 'center'
+    },
+    statsLabel: {
+        marginTop: 30,
+        textAlign: 'center'
+    },
     nameInput: {
         backgroundColor: '#fff',
         borderColor: '#000',
         borderWidth: 1,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: '100%'
     },
     container: {
         paddingTop: 40,
+        width: '80%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        justifyContent: 'center',
+        flex: 1
     },
     pickerContainer: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
         backgroundColor: '#fff',
+        width: '100%',
         borderWidth: 1,
-        borderColor: '#000'
+        height: 'auto',
+        borderColor: '#000',
+    },
+    picker: {
     },
     submitButton: {
+        marginBottom: 80,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: '100%',
         backgroundColor: '#fff',
         width: '70%',
         paddingVertical: 10,
@@ -104,6 +140,16 @@ const styles = StyleSheet.create({
     },
     submitButtonText: {
         textAlign: 'center'
+    },
+    gridView: {
+        width: '100%',
+        marginLeft: 'auto',
+        marginRight: 'auto'
+    },
+    itemWrapper: {
+        width: '80%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     }
 });
 

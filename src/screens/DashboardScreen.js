@@ -27,16 +27,17 @@ const InventorySlotListItem = ({ item }) => {
     const navigation = useNavigation();
 
     return (
-        
+
         <View style={styles.listItem}>
             <Text style={styles.listText}>{item.name} </Text>
-            <Text onPress={() => {navigation.navigate('InventoryItem', {
-                name: item.name,
-                itemType: item.itemType
-            }),
-            console.log(item.itemType)
-        }} 
-            style={styles.listIcon}>{'>>'}</Text>
+            <Text onPress={() => {
+                navigation.navigate('InventoryItem', {
+                    name: item.name,
+                    itemType: item.itemType
+                }),
+                console.log(item.itemType)
+            }}
+                style={styles.listIcon}>{'>>'}</Text>
         </View>
     )
 }
@@ -70,7 +71,7 @@ const DashboardScreen = () => {
             />
             <View style={styles.listContainer}>
                 <FlatList
-                    data={AvatarMock.gear}
+                    data={AvatarMock.equipped}
                     renderItem={renderItem}
                     keyExtractor={item => item.itemType}
                 />

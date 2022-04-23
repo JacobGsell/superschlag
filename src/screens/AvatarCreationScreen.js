@@ -29,15 +29,14 @@ const AvatarCreationScreen = () => {
         const selectedJob = JobMocks[selectedValue]
 
         const newAvatar = {
-            name: AvatarNameText
+            name: AvatarNameText,
+            jobId: selectedJob.id
         }
 
         console.log(newAvatar)
-
     }
 
     let selectedJob = JobMocks[0];
-    // setItems(selectedJob.stats)
 
     return (
         <View

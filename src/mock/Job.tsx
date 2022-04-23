@@ -16,7 +16,7 @@ export const JobMocks =
             name: 'Milchmann',
             stats: {
                 attack: 5,
-                defense: 5, 
+                defense: 5,
                 evasion: 5,
                 luck: 150,
                 health: 10

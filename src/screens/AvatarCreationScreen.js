@@ -4,10 +4,7 @@ import { Picker } from '@react-native-picker/picker';
 import { FlatGrid } from 'react-native-super-grid';
 import CustomButton from '../components/CustomButton';
 import { JobMocks } from '../mock/Job';
-
-const CreateAvatar = (content) => {
-    console.log(content);
-}
+import axios from 'axios';
 
 const AvatarCreationScreen = () => {
     const [items, setItems] = React.useState([
@@ -21,7 +18,26 @@ const AvatarCreationScreen = () => {
     const [selectedValue, setSelectedValue] = React.useState('');
     const [AvatarNameText, onChangeText] = React.useState('');
 
+    const createPickerItems = (jobs) => {
+        return jobs.map((job, index) => {
+            return <Picker.Item label={job.name} value={index}/>
+        })
+    }
+
+    function CreateAvatar(selectedValue) {
+
+        const selectedJob = JobMocks[selectedValue]
+
+        const newAvatar = {
+            name: AvatarNameText
+        }
+
+        console.log(newAvatar)
+
+    }
+
     let selectedJob = JobMocks[0];
+    // setItems(selectedJob.stats)
 
     return (
         <View
@@ -36,11 +52,13 @@ const AvatarCreationScreen = () => {
                 Name deines Milchmanns
             </Text>
 
-            <TextInput
-                style={styles.nameInput}
-                onChangeText={onChangeText}
-                value={AvatarNameText}
-            />
+            <View style={styles.nameInputWrapper}>
+                <TextInput
+                    style={styles.nameInput}
+                    onChangeText={onChangeText}
+                    value={AvatarNameText}
+                />
+            </View>
 
             <Text style={styles.jobLabel}>
                 Wähle deine Klasse!
@@ -51,21 +69,25 @@ const AvatarCreationScreen = () => {
                     style={styles.picker}
                     selectedValue={selectedValue}
                     onValueChange={(itemValue, itemIndex) => {
-                        console.log("index", itemIndex)
-                        console.log("value", itemValue)
-                        console.log("name", JobMocks[itemValue].name)
+
                         selectedJob = JobMocks[itemValue]
 
-                        setSelectedValue(itemValue)
-                        
+                        // let response = axios('http://192.168.2.49:8080/avatar/8')
+                        // .then(response => {
+                        //     console.log(response.data.jobDto.statsDto)
+                        //     const jobStats = response.data.jobDto.statsDto
+
+                        //     setItems(Object.entries(jobStats))
+                        // })
+
+
+
                         setItems(Object.entries(selectedJob.stats))
-                        console.log(Object.entries(selectedJob.stats))
-                        //setItems(Object.entries(selectedJob.stats))
+                        setSelectedValue(itemValue)
                     }}
                 >
-                    <Picker.Item label="Milchmann" value="0" />
-                    <Picker.Item label="Ritter" value="1" />
-                    <Picker.Item label="Dieb" value="2" />
+
+                    {createPickerItems(JobMocks)}
                 </Picker>
             </View>
 
@@ -83,8 +105,8 @@ const AvatarCreationScreen = () => {
                 renderItem={({ item }) => (
                     <View style={[styles.itemContainer]}>
                         <View style={styles.itemWrapper}>
-                            <Text style={styles.itemName}>{item[0]}: 
-                                <Text style={{fontWeight: 'bold'}}> {item[1]}</Text>
+                            <Text style={styles.itemName}>{item[0]}:
+                                <Text style={{ fontWeight: 'bold' }}> {item[1]}</Text>
                             </Text>
                         </View>
                     </View>
@@ -117,14 +139,17 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center'
     },
-    nameInput: {
+    nameInputWrapper: {
         backgroundColor: '#fff',
         borderColor: '#000',
         borderWidth: 1,
         marginLeft: 'auto',
         marginRight: 'auto',
         width: '100%',
-        textAlign: 'center'
+        textAlign: 'left'
+    },
+    nameInput: {
+        marginLeft: 8
     },
     container: {
         paddingTop: 40,

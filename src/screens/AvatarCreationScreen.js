@@ -7,20 +7,23 @@ import { JobMocks } from '../mock/Job';
 import axios from 'axios';
 
 const AvatarCreationScreen = () => {
-    const [items, setItems] = React.useState([
-        { name: 'Angriff', code: 10 },
-        { name: 'Verteidigung', code: 5 },
-        { name: 'Glück', code: 27 },
-        { name: 'Ausweichen', code: 20 },
-        { name: 'Leben', code: 15 },
-    ]);
+    const [items, setItems] = React.useState(
+        [
+            ["attack", 10],
+            ["defense", 10],
+            ["evasion", 10],
+            ["luck", 150],
+            ["attack", 10],
+        ]
+    );
 
     const [selectedValue, setSelectedValue] = React.useState('');
     const [AvatarNameText, onChangeText] = React.useState('');
 
     const createPickerItems = (jobs) => {
         return jobs.map((job, index) => {
-            return <Picker.Item label={job.name} value={index}/>
+
+            return <Picker.Item key={job.id} label={job.name} value={index} />
         })
     }
 
@@ -30,8 +33,11 @@ const AvatarCreationScreen = () => {
 
         const newAvatar = {
             name: AvatarNameText,
+            ownedItemList: [],
             jobId: selectedJob.id
         }
+
+        console.log('new avatar', newAvatar);
     }
 
     let selectedJob = JobMocks[0];
@@ -78,13 +84,14 @@ const AvatarCreationScreen = () => {
                         // })
 
 
-
+                        console.log(Object.entries(selectedJob.stats));
                         setItems(Object.entries(selectedJob.stats))
                         setSelectedValue(itemValue)
                     }}
                 >
 
                     {createPickerItems(JobMocks)}
+                    {setItems(Object.entries(JobMocks[0].stats))}
                 </Picker>
             </View>
 

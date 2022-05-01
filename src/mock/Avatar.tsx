@@ -1,9 +1,11 @@
 export const AvatarMock = {
+
     name: 'Bernd92',
     job: {
-        id: 0,
+        id: "0",
         name: 'Milchmann',
         stats: {
+            id: "1",
             attack: 1,
             defense: 1,
             luck: 1,
@@ -11,10 +13,10 @@ export const AvatarMock = {
             health: 10
         }
     },
-    equipped:
+    ownedItemDtoList:
         [
             {
-                id: 2,
+                id: "1",
                 itemType: 'weapon',
                 name: '5 Murmeln',
                 stats: {
@@ -26,7 +28,7 @@ export const AvatarMock = {
                 }
             },
             {
-                id: 17,
+                id: "17",
                 itemType: 'armor',
                 name: 'Fahrradhelm',
                 stats: {
@@ -38,7 +40,7 @@ export const AvatarMock = {
                 }
             },
             {
-                id: 89,
+                id: "89",
                 itemType: 'amulet',
                 name: 'FiveGum-Schachtel',
                 stats: {

@@ -1,5 +1,6 @@
 export const JobMock = {
     name: 'Milchmann',
+    id: "0",
     stats: {
         attack: 3,
         defense: 2,
@@ -12,7 +13,7 @@ export const JobMock = {
 export const JobMocks =
     [
         {
-            id: 0,
+            id: "0",
             name: 'Milchmann',
             stats: {
                 attack: 5,
@@ -23,7 +24,7 @@ export const JobMocks =
             }
         },
         {
-            id: 1,
+            id: "1",
             name: 'Ritter',
             stats: {
                 attack: 20,
@@ -34,7 +35,7 @@ export const JobMocks =
             }
         },
         {
-            id: 2,
+            id: "2",
             name: 'Dieb',
             stats: {
                 attack: 15,

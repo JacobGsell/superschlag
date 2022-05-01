@@ -38,6 +38,14 @@ const AvatarCreationScreen = () => {
         }
 
         console.log('new avatar', newAvatar);
+
+        // axios.post('http://192.168.2.49:8080/avatar', newAvatar)
+        //   .then(function (response) {
+        //     console.log(response);
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
     }
 
     let selectedJob = JobMocks[0];
@@ -91,7 +99,6 @@ const AvatarCreationScreen = () => {
                 >
 
                     {createPickerItems(JobMocks)}
-                    {setItems(Object.entries(JobMocks[0].stats))}
                 </Picker>
             </View>
 

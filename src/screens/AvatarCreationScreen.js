@@ -17,35 +17,41 @@ const AvatarCreationScreen = () => {
         ]
     );
 
-    const [selectedValue, setSelectedValue] = React.useState('');
+    const [selectedValue, setSelectedValue] = React.useState(JobMocks[0].id);
     const [AvatarNameText, onChangeText] = React.useState('');
 
     const createPickerItems = (jobs) => {
-        return jobs.map((job, index) => {
+        // console.log("testi")
 
+        // const response = await axios.get('http://192.168.2.49:8080/jobs')
+        //     .then(response => {
+        //         return response['data'];
+        //     })
+
+        // console.log(Object.keys(response))
+
+
+        return jobs.map((job, index) => {
             return <Picker.Item key={job.id} label={job.name} value={index} />
         })
-    }
+    };
 
     function CreateAvatar(selectedValue) {
-
-        const selectedJob = JobMocks[selectedValue]
-
         const newAvatar = {
             name: AvatarNameText,
-            ownedItemList: [],
-            jobId: selectedJob.id
+            ownedItemDaoList: [],
+            jobId: selectedValue
         }
 
         console.log('new avatar', newAvatar);
 
-        // axios.post('http://192.168.2.49:8080/avatar', newAvatar)
-        //   .then(function (response) {
-        //     console.log(response);
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //   });
+        axios.post('http://192.168.2.49:8080/avatar', newAvatar)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     let selectedJob = JobMocks[0];
@@ -57,7 +63,6 @@ const AvatarCreationScreen = () => {
             <Text style={styles.title}>
                 Erstelle deinen Avatar!
             </Text>
-
 
             <Text style={styles.nameLabel}>
                 Name deines Milchmanns
@@ -98,7 +103,9 @@ const AvatarCreationScreen = () => {
                     }}
                 >
 
-                    {createPickerItems(JobMocks)}
+                    {
+                        createPickerItems(JobMocks)
+                    }
                 </Picker>
             </View>
 
